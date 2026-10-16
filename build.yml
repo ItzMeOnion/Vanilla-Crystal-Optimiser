@@ -23,3 +23,4 @@ jobs:
         with:
           name: paper-game-mod
           path: build/libs/*.jar
+ 
