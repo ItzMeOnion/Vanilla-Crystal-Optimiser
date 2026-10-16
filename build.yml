@@ -1,26 +1,34 @@
-name: Build Paper Game
+
+name: Build Paper Game Mod
+
 on:
   push:
-  pull_request:
   workflow_dispatch:
-permissions:
-  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
         with:
-          distribution: temurin
           java-version: '21'
-      - uses: gradle/actions/setup-gradle@v4
+          distribution: temurin
+
+      - name: Set up Gradle 8.11.1
+        uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.10.2'
+          gradle-version: '8.11.1'
+
       - name: Build mod
         run: gradle build
-      - uses: actions/upload-artifact@v4
+
+      - name: Upload mod JAR
+        uses: actions/upload-artifact@v4
         with:
           name: paper-game-mod
           path: build/libs/*.jar
- 
